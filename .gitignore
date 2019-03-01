@@ -1,0 +1,54 @@
+# System Files
+
+## OS X Files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+## Thumbnails
+._*
+
+## Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+## Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Sensitive Stuff
+/secure-local/
+/secure-remote/
+
+# Config Files
+/gke-config/
+
+## Workspace Files
+/.idea
+
+# Temporary Files
+
+## General Exclusions
+/bin/
+/vendor/
+/kirby/
+
+/website/thumbs/*
+!/website/thumbs/index.html
+
+/website/site/cache/*
+!/website/site/cache/index.html
+
+/website/content/
+
+# Security
+
+## Kirby Accounts
+/website/site/accounts/*
+!/website/site/accounts/index.html
+
+/website/assets/avatars/*
+!/website/assets/avatars/index.html
