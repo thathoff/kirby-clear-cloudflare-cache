@@ -14,6 +14,9 @@ Kirby::plugin('thestreamable/clearcloudflarecache', [
         'dependantUrlsForPage'  => function ($hook, $page, $oldPage = null) {
             return $oldPage ? [$page->url(), $oldPage->url()] : $page->url();
         },
+        'dependantUrlsForSite'  => function ($hook, $site, $oldSite = null) {
+            return $site->url();
+        },
     ],
     'hooks' => [
         'page.changeNum:after' => function ($page, $oldPage) {
@@ -38,7 +41,10 @@ Kirby::plugin('thestreamable/clearcloudflarecache', [
             CloudflareCache::handlePageHook('page.delete:after', $oldPage);
         },
         'page.update:after' => function ($page, $oldPage) {
-            CloudflareCache::handlePageHook('page.changeSlug:after', $page);
+            CloudflareCache::handlePageHook('page.changeSlug:after', $page, $oldPage);
+        },
+        'site.update:after' => function ($site, $oldSite) {
+            CloudflareCache::handleSiteHook('site.update:after', $site);
         },
     ],
 ]);

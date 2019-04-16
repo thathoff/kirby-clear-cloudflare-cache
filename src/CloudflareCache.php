@@ -18,6 +18,14 @@ class CloudflareCache
         }
     }
     
+    public static function handleSiteHook($hook, $site, $oldSite = null)
+    {
+        $callback = option('thestreamable.clearcloudflarecache.dependantUrlsForSite');
+        if ($callback && is_callable($callback)) {
+            static::purgeURLs($callback($hook, $site, $oldSite));
+        }
+    }
+    
     public static function purgeURLs($pagesOrURLs)
     {
         if (!$pagesOrURLs) {
@@ -28,7 +36,7 @@ class CloudflareCache
         $cloudflareEmail = option('thestreamable.clearcloudflarecache.cloudflareEmail');
         $cloudflareAPIKey = option('thestreamable.clearcloudflarecache.cloudflareAPIKey');
         if ('' == $cloudflareZone || '' == $cloudflareEmail || '' == $cloudflareAPIKey) {
-            return;
+//             return;
         }
         
         if ($pagesOrURLs instanceof Collection) {
