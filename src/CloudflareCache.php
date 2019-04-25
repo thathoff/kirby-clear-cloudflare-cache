@@ -36,7 +36,7 @@ class CloudflareCache
         $cloudflareEmail = option('thestreamable.clearcloudflarecache.cloudflareEmail');
         $cloudflareAPIKey = option('thestreamable.clearcloudflarecache.cloudflareAPIKey');
         if ('' == $cloudflareZone || '' == $cloudflareEmail || '' == $cloudflareAPIKey) {
-//             return;
+            return;
         }
         
         if ($pagesOrURLs instanceof Collection) {
