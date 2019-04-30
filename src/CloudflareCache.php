@@ -18,6 +18,14 @@ class CloudflareCache
         }
     }
     
+    public static function handleFileHook($hook, $file, $oldFile = null)
+    {
+        $callback = option('thestreamable.clearcloudflarecache.dependantUrlsForFile');
+        if ($callback && is_callable($callback)) {
+            static::purgeURLs($callback($hook, $file, $oldFile));
+        }
+    }
+    
     public static function handleSiteHook($hook, $site, $oldSite = null)
     {
         $callback = option('thestreamable.clearcloudflarecache.dependantUrlsForSite');
