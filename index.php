@@ -34,54 +34,54 @@ Kirby::plugin('thestreamable/clearcloudflarecache', [
     ],
     'hooks' => [
         // Page
-        'page.changeNum:after' => function ($page, $oldPage) {
-            CloudflareCache::handlePageHook('page.changeNum:after', $page);
+        'page.changeNum:after' => function ($newPage) {
+            CloudflareCache::handlePageHook('page.changeNum:after', $newPage);
         },
-        'page.changeSlug:after' => function ($page, $oldPage) {
-            CloudflareCache::handlePageHook('page.changeSlug:after', $page, $oldPage);
+        'page.changeSlug:after' => function ($newPage, $oldPage) {
+            CloudflareCache::handlePageHook('page.changeSlug:after', $newPage, $oldPage);
         },
-        'page.changeStatus:after' => function ($page, $oldPage) {
-            CloudflareCache::handlePageHook('page.changeStatus:after', $page);
+        'page.changeStatus:after' => function ($newPage) {
+            CloudflareCache::handlePageHook('page.changeStatus:after', $newPage);
         },
-        'page.changeTemplate:after' => function ($page, $oldPage) {
-            CloudflareCache::handlePageHook('page.changeTemplate:after', $page);
+        'page.changeTemplate:after' => function ($newPage) {
+            CloudflareCache::handlePageHook('page.changeTemplate:after', $newPage);
         },
-        'page.changeTitle:after' => function ($page, $oldPage) {
-            CloudflareCache::handlePageHook('page.changeTitle:after', $page);
+        'page.changeTitle:after' => function ($newPage) {
+            CloudflareCache::handlePageHook('page.changeTitle:after', $newPage);
         },
         'page.create:after' => function ($page) {
             CloudflareCache::handlePageHook('page.create:after', $page);
         },
-        'page.delete:after' => function ($status, $oldPage) {
-            CloudflareCache::handlePageHook('page.delete:after', $oldPage);
+        'page.delete:after' => function ($status, $page) {
+            CloudflareCache::handlePageHook('page.delete:after', $page);
         },
-        'page.update:after' => function ($page, $oldPage) {
-            CloudflareCache::handlePageHook('page.changeSlug:after', $page, $oldPage);
+        'page.update:after' => function ($newPage, $oldPage) {
+            CloudflareCache::handlePageHook('page.changeSlug:after', $newPage, $oldPage);
         },
-        
+
         // File
-        'file.changeName:after' => function ($file, $oldFile) {
-            CloudflareCache::handleFileHook('file.changeName:after', $file, $oldFile);
+        'file.changeName:after' => function ($newFile, $oldFile) {
+            CloudflareCache::handleFileHook('file.changeName:after', $newFile, $oldFile);
         },
-        'file.changeSort:after' => function ($file, $oldFile) {
-            CloudflareCache::handleFileHook('file.changeSort:after', $file, $oldFile);
+        'file.changeSort:after' => function ($newFile, $oldFile) {
+            CloudflareCache::handleFileHook('file.changeSort:after', $newFile, $oldFile);
         },
         'file.create:after' => function ($file) {
             CloudflareCache::handleFileHook('file.create:after', $file);
         },
-        'file.delete:after' => function ($status, $oldFile) {
-            CloudflareCache::handleFileHook('file.delete:after', $oldFile);
+        'file.delete:after' => function ($status, $file) {
+            CloudflareCache::handleFileHook('file.delete:after', $file);
         },
-        'file.replace:after' => function ($file, $oldFile) {
-            CloudflareCache::handleFileHook('file.replace:after', $file, $oldFile);
+        'file.replace:after' => function ($newFile, $oldFile) {
+            CloudflareCache::handleFileHook('file.replace:after', $newFile, $oldFile);
         },
-        'file.update:after' => function ($file, $oldFile) {
-            CloudflareCache::handleFileHook('file.update:after', $file, $oldFile);
+        'file.update:after' => function ($newFile, $oldFile) {
+            CloudflareCache::handleFileHook('file.update:after', $newFile, $oldFile);
         },
-        
+
         // Site
-        'site.update:after' => function ($site, $oldSite) {
-            CloudflareCache::handleSiteHook('site.update:after', $site);
+        'site.update:after' => function ($newSite, $oldSite) {
+            CloudflareCache::handleSiteHook('site.update:after', $newSite);
         },
     ],
 ]);
