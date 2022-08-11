@@ -49,17 +49,18 @@ class CloudflareCache
 
         if ($pagesOrURLs instanceof Collection) {
             $pagesOrURLs = $pagesOrURLs->pluck('url');
-        }
-        elseif ($pagesOrURLs instanceof Page) {
+        } elseif ($pagesOrURLs instanceof Page) {
             $pagesOrURLs = [$pagesOrURLs->url()];
-        }
-        elseif (!is_array($pagesOrURLs)) {
+        } elseif (!is_array($pagesOrURLs)) {
             $pagesOrURLs = [$pagesOrURLs];
         }
 
-        $pagesOrURLs = array_map(function($urlItem) {
-            return $urlItem instanceof Page ? $urlItem->url() : (string)$urlItem;
-        }, $pagesOrURLs);
+        $pagesOrURLs = array_map(
+            function ($urlItem) {
+                return $urlItem instanceof Page ? $urlItem->url() : (string)$urlItem;
+            },
+            $pagesOrURLs
+        );
 
         $pagesOrURLs = array_unique($pagesOrURLs);
         if (!count($pagesOrURLs)) {
@@ -67,17 +68,21 @@ class CloudflareCache
         }
 
         foreach (array_chunk($pagesOrURLs, static::API_URL_BATCH_SIZE) as $urlBatch) {
-            Remote::post('https://api.cloudflare.com/client/v4/zones/' . $cloudflareZone . '/purge_cache', [
-                'headers' => [
-                    'X-Auth-Email: ' . $cloudflareEmail,
-                    'X-Auth-Key: ' . $cloudflareAPIKey,
-                    'Content-Type: application/json',
-                ],
-                'data' => json_encode([
-                    'files' => array_values($urlBatch),
-                ]),
-            ]);
+            Remote::post(
+                'https://api.cloudflare.com/client/v4/zones/' . $cloudflareZone . '/purge_cache',
+                [
+                    'headers' => [
+                        'X-Auth-Email: ' . $cloudflareEmail,
+                        'X-Auth-Key: ' . $cloudflareAPIKey,
+                        'Content-Type: application/json',
+                    ],
+                    'data' => json_encode(
+                        [
+                        'files' => array_values($urlBatch),
+                        ]
+                    ),
+                ]
+            );
         }
     }
-
 }
