@@ -1,23 +1,23 @@
 # Clear Cloudflare Cache Kirby Plugin
 
-This Kirby plugin can automatically purge Cloudflare cached URLs. This plugin is used on [The Streamable](https://thestreamable.com).
+This Kirby plugin can automatically purge Cloudflare cached URLs.
 
 ## Installation
 
 ### Download
 
-Download and copy this repository to `/site/plugins/kirby-clear-cloudflare-cache`.
+Download and copy this repository to `/site/plugins/clear-cloudflare-cache`.
 
 ### Git submodule
 
 ```
-git submodule add https://github.com/thestreamable/kirby-clear-cloudflare-cache.git site/plugins/kirby-clear-cloudflare-cache
+git submodule add https://github.com/thathoff/kirby-clear-cloudflare-cache.git site/plugins/clear-cloudflare-cache
 ```
 
 ### Composer
 
 ```
-composer require thestreamable/kirby-clear-cloudflare-cache
+composer require thathoff/kirby-clear-cloudflare-cache
 ```
 
 ## Setup
@@ -25,23 +25,23 @@ composer require thestreamable/kirby-clear-cloudflare-cache
 At a minimum, you must set the following options in your `config.php` file:
 
 ```php
-'thestreamable.clearcloudflarecache.cloudflareZoneID' => 'YOUR_CF_ZONE_ID',
-'thestreamable.clearcloudflarecache.cloudflareEmail'  => 'YOUR_CF_EMAIL',
-'thestreamable.clearcloudflarecache.cloudflareAPIKey' => 'YOUR_CF_API_KEY',
+'thathoff.clearcloudflarecache.cloudflareZoneID' => 'YOUR_CF_ZONE_ID',
+'thathoff.clearcloudflarecache.cloudflareEmail'  => 'YOUR_CF_EMAIL',
+'thathoff.clearcloudflarecache.cloudflareAPIKey' => 'YOUR_CF_API_KEY',
 ```
 
 ## Options
 
-### `thestreamable.clearcloudflarecache.cloudflareZoneID`
+### `thathoff.clearcloudflarecache.cloudflareZoneID`
 This must be set to your Cloudflare Zone ID (available in the Overview dashboard).
 
-### `thestreamable.clearcloudflarecache.cloudflareEmail`
+### `thathoff.clearcloudflarecache.cloudflareEmail`
 This must be set to the email address of your Cloudflare account.
 
-### `thestreamable.clearcloudflarecache.cloudflareAPIKey`
+### `thathoff.clearcloudflarecache.cloudflareAPIKey`
 This must be set to your Cloudflare API Key (available in the Profile page).
 
-### `thestreamable.clearcloudflarecache.dependantUrlsForPage`
+### `thathoff.clearcloudflarecache.dependantUrlsForPage`
 This must be a function that returns what URL(s) should be cleared after a page modification.
 
 By default, simply returns the URL of the page itself and potentially the previous URL (in the case of a slug change).
@@ -55,7 +55,7 @@ function ($hook, $page, $oldPage = null) {
 If you know that a change to one page affects other pages, you could include them as well. For example, the following would clear the Cloudflare cache for a modified page siblings (including the affected page) and parent pages.
 
 ```php
-'thestreamable.clearcloudflarecache.dependantUrlsForPage'=> function ($hook, $page, $oldPage = null) {
+'thathoff.clearcloudflarecache.dependantUrlsForPage'=> function ($hook, $page, $oldPage = null) {
     return $page->parents()->add($page->siblings(true));
 },
 ```
@@ -63,7 +63,7 @@ If you know that a change to one page affects other pages, you could include the
 Or, a more elaborate example could include a sitemap and content representations:
 
 ```php
-'thestreamable.clearcloudflarecache.dependantUrlsForPage'=> function ($hook, $page, $oldPage = null) {
+'thathoff.clearcloudflarecache.dependantUrlsForPage'=> function ($hook, $page, $oldPage = null) {
     $urls = [];
     $urls[] = $page->url();
     $urls[] = $page->url() . '.json';
@@ -94,4 +94,6 @@ MIT
 
 ## Credits
 
-- [Neil Daniels](https://github.com/neildaniels) of [The Streamable](https://thestreamable.com)
+Maintained by [Markus Denhoff](https://github.com/thathoff),
+originally developed by [Neil Daniels](https://github.com/neildaniels)
+of [The Streamable](https://thestreamable.com)

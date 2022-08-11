@@ -1,12 +1,12 @@
 <?php
 
 load([
-    'TheStreamable\\ClearCloudflareCache\\CloudflareCache' => 'src/CloudflareCache.php'
+    'Thathoff\\ClearCloudflareCache\\CloudflareCache' => 'src/CloudflareCache.php'
 ], __DIR__);
 
-use TheStreamable\ClearCloudflareCache\CloudflareCache;
+use Thathoff\ClearCloudflareCache\CloudflareCache;
 
-Kirby::plugin('thestreamable/clearcloudflarecache', [
+Kirby::plugin('thathoff/clearcloudflarecache', [
     'options' => [
         'cloudflareZoneID'      => null,
         'cloudflareEmail'       => null,
@@ -20,7 +20,7 @@ Kirby::plugin('thestreamable/clearcloudflarecache', [
                 'file.create:after',
                 'file.update:after',
             ]);
-            
+
             $urls = $clearParentOnly ? [$file->parent()->url()] : [$file->url(), $file->parent()->url()];
             if ($oldFile && !$clearParentOnly) {
                 $urls[] = $oldFile->url();

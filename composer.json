@@ -1,9 +1,13 @@
 {
-    "name": "thestreamable/kirby-clear-cloudflare-cache",
+    "name": "thathoff/kirby-clear-cloudflare-cache",
     "description": "Kirby plugin to clear Cloudflare cache URLs",
     "type": "kirby-plugin",
     "license": "MIT",
     "authors": [
+        {
+            "name": "Markus Denhoff",
+            "email": "markus@denhoff.com"
+        },
         {
             "name": "Neil Daniels",
             "email": "neil@thestreamable.com"
@@ -11,5 +15,8 @@
     ],
     "require": {
         "getkirby/composer-installer": "^1.1"
+    },
+    "extra": {
+        "installer-name": "clear-cloudflare-cache"
     }
 }
